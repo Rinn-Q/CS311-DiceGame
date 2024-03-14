@@ -17,14 +17,15 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         
         // Set the Scene to the Stage
+    
         primaryStage.setScene(scene);
         
         // Set the title of the Stage
-        primaryStage.setTitle("Your Application Title");
+        primaryStage.setTitle("DICE GAME");
         
         // Show the Stage
         primaryStage.show();
-    }
+    }   
 
     public static void main(String[] args) {
         launch(args);
