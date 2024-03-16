@@ -83,7 +83,7 @@ public class Controller {
                 System.out.println("Thread Running");
                 try {
                     for (int i = 0; i < 15; i++) {
-                        File file = new File("Dices/dice-" + (random.nextInt(6) + 1) + ".png");
+                        File file = new File("DiceGame/Dices/dice-" + (random.nextInt(6) + 1) + ".png");
                         diceImage.setImage(new Image(file.toURI().toString()));
                         Thread.sleep(50);
                     }

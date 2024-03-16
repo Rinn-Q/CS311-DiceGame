@@ -15,6 +15,8 @@ public class Main extends Application {
         
         // Create a Scene
         Scene scene = new Scene(root);
+        String css = this.getClass().getResource("application.css").toExternalForm();
+        scene.getStylesheets().add(css);
         
         // Set the Scene to the Stage
     
