@@ -64,6 +64,8 @@ public class Controller {
     @FXML
     private void onClickHold(ActionEvent event) {
         // Handle the "HOLD" button click event
+
+
     }
     @FXML
     private void onClickMenu(ActionEvent event) {
@@ -83,9 +85,11 @@ public class Controller {
                 System.out.println("Thread Running");
                 try {
                     for (int i = 0; i < 15; i++) {
-                        File file = new File("DiceGame/Dices/dice-" + (random.nextInt(6) + 1) + ".png");
+                        int diceNumber = (random.nextInt(6) + 1);
+                        File file = new File("DiceGame/Dices/dice-" + diceNumber + ".png");
                         diceImage.setImage(new Image(file.toURI().toString()));
                         Thread.sleep(50);
+                        System.out.println(diceNumber);
                     }
                     rollDiceButton.setDisable(false);
                 } catch (InterruptedException e) {
