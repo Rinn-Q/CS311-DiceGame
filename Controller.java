@@ -1,4 +1,3 @@
-package DiceGame;
 import java.io.File;
 
 import javafx.event.ActionEvent;
