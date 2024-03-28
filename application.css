@@ -3,13 +3,17 @@
 }
 
 .button{
-    -fx-background-color: #9BCF53;
+    -fx-background-color: #EB4D4D;
+    -fx-text-fill: #fff;
 }
 
 .text-field{
-    -fx-background-color: #FFE4C9;
+    -fx-background-color: #EB4D4D;
+    -fx-text-fill: #fff;
 }
 
 #rollDiceButton {
-    -fx-background-color: #E78895;
+    -fx-background-color: #EB4D4D;
 }
+
+
