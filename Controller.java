@@ -183,7 +183,7 @@ public class Controller {
                         int diceNumber;
                         for (int i = 0; i < 15; i++) {
                             diceNumber = random.nextInt(6) + 1;
-                            File file = new File("C:/Users/Daavka/Desktop/programming production/dicegame/Dices/dice-" + diceNumber + ".png");
+                            File file = new File("C:\\Users\\buren\\OneDrive\\Documents\\GitHub\\CS311-DiceGame\\Dices\\dice-" + diceNumber + ".png");
                             diceImage.setImage(new Image(file.toURI().toString()));
                             Thread.sleep(50);
                             if(i == 14) {
@@ -239,7 +239,7 @@ public class Controller {
             player1.setStyle("-fx-background-color: #f4f4f4;");
 
             name0.setFont(Font.font("System", FontWeight.BOLD, 16));
-            name1.setFont(Font.font("System", FontWeight.BLACK, 12));
+            name1.setFont(Font.font("System", FontWeight.BLACK, 16));
         }
     }
 
