@@ -2,7 +2,11 @@ import java.io.File;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -167,6 +171,25 @@ public class Controller {
     @FXML
     private void onClickMenu(ActionEvent event) {
         // Handle the "MENU" button click event
+        Alert alert = new Alert(AlertType.NONE);
+        alert.setTitle("Тоглоомын танилцуулга");
+
+        alert.setContentText(
+            "1. 2 тоглогч хэн нь түрүүлж эхлэхээ хоорондоо тохирно. " + "\n" +
+            "2. Таныг оноогоо татах эсвэл алдах хүртэл одоогийн оноонд шооны буусан оноо нэмэгдэнэ. " + "\n" +
+            "3. Ээлжээр шоог хаях бөгөөд таны хаясан шоо 1 нүдээр буух хүртэл эсвэл цуглуулсан оноог татаж авах хүртэл хаяж болно." + "\n" + 
+            "4. Түрүүлж 20 оноонд хүрсэн тоглогч ялалт байгуулна.");
+
+        ButtonType closeButton = new ButtonType("OKAYYY", ButtonData.OK_DONE);
+        alert.getButtonTypes().add(closeButton);
+
+        Button closeBtn = (Button) alert.getDialogPane().lookupButton(closeButton);
+        closeBtn.setOnAction(e -> alert.close());
+
+
+        alert.getDialogPane().setPrefWidth(350); // Set your preferred width
+        alert.getDialogPane().setPrefHeight(250);
+        alert.showAndWait();
     }
     @FXML
     private void  setCurrentPlayerImage(ImageView view){
