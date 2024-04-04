@@ -8,6 +8,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        Image icon = new Image(getClass().getResourceAsStream("game-icon.png"));
+        primaryStage.getIcons().add(icon);
         // Load the FXML file
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Controller.fxml"));
         Parent root = loader.load();
