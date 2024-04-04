@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import java.nio.file.*;
 
 import java.util.Random;
 
@@ -178,12 +179,13 @@ public class Controller {
         diceImage.setVisible(true);
         Thread thread = new Thread() {
             public void run() {
+                Path currentPath = Paths.get(System.getProperty("user.dir"));
                 if(isNewGame == true) {
                     try {
                         int diceNumber;
                         for (int i = 0; i < 15; i++) {
                             diceNumber = random.nextInt(6) + 1;
-                            File file = new File("C:/Users/Daavka/Desktop/programming production/dicegame/Dices/dice-" + diceNumber + ".png");
+                            File file = new File(currentPath + "/Dices/dice-" + diceNumber + ".png");
                             diceImage.setImage(new Image(file.toURI().toString()));
                             Thread.sleep(50);
                             if(i == 14) {
