@@ -1,3 +1,6 @@
+import java.io.File;
+import java.nio.file.Paths;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -5,13 +8,14 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.nio.file.*;
-
 public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Image icon = new Image(getClass().getResourceAsStream("game-icon.png"));
+        Path currentPath = Paths.get(System.getProperty("user.dir"));
+        File file = new File(currentPath + "/Dices/game-icon.png");
+        Image icon = new Image(file.toURI().toString());
         primaryStage.getIcons().add(icon);
         // Load the FXML file
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Controller.fxml"));
