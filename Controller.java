@@ -1,5 +1,4 @@
 import java.io.File;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -18,6 +17,7 @@ import javafx.scene.text.FontWeight;
 import java.nio.file.*;
 
 import java.util.Random;
+import Backside.*;
 
 public class Controller {
     private boolean isNewGame;
@@ -26,6 +26,7 @@ public class Controller {
     private int roundScore;
 
     Random random = new Random();
+    diceRNG rand = new diceRNG();
 
     @FXML
     private Button newGameButton;
@@ -96,6 +97,7 @@ public class Controller {
 
         score0.setText("0");
         score1.setText("0");
+
         current0.setText("0");
         current1.setText("0");
 
@@ -213,6 +215,10 @@ public class Controller {
                             Thread.sleep(50);
                             if(i == 14) {
 
+                                diceNumber = rand.diceRoll();
+                                file = new File(currentPath + "/Dices/dice-" + diceNumber + ".png");
+                                diceImage.setImage(new Image(file.toURI().toString()));
+                                Thread.sleep(50);
                                 if(diceNumber != 1) {
                                     roundScore += diceNumber;
                                     if(activePlayer == 0){
@@ -241,6 +247,7 @@ public class Controller {
     }
 
     public void switchToNextPlayer() {
+        rand.rngReset();
         roundScore = 0;
         if(activePlayer == 0) {
             current0.setText("0");
