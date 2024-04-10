@@ -17,7 +17,7 @@ import javafx.scene.text.FontWeight;
 import java.nio.file.*;
 
 import java.util.Random;
-import Backside.*;
+import Backend.*;
 
 public class Controller {
     private boolean isNewGame;
@@ -136,6 +136,7 @@ public class Controller {
     @FXML
     private void onClickHold(ActionEvent event) {
         // Handle the "HOLD" button click event
+        rand.rngReset();
         if(isNewGame == true) {
             scores[activePlayer] += roundScore;
             if(activePlayer == 0) {
@@ -144,7 +145,7 @@ public class Controller {
                 score1.setText(Integer.toString(scores[activePlayer]));
             }
 
-            if(scores[activePlayer] >= 20) {
+            if(scores[activePlayer] >= 40) {
                 isNewGame = false;
 
                 diceImage.setVisible(false);
@@ -214,7 +215,6 @@ public class Controller {
                             diceImage.setImage(new Image(file.toURI().toString()));
                             Thread.sleep(50);
                             if(i == 14) {
-
                                 diceNumber = rand.diceRoll();
                                 file = new File(currentPath + "/Dices/dice-" + diceNumber + ".png");
                                 diceImage.setImage(new Image(file.toURI().toString()));
@@ -232,7 +232,6 @@ public class Controller {
                                     switchToNextPlayer();
                                 }
                             }
-                                
                         }
                         rollDiceButton.setDisable(false);
                     } catch (InterruptedException e) {
@@ -247,7 +246,6 @@ public class Controller {
     }
 
     public void switchToNextPlayer() {
-        rand.rngReset();
         roundScore = 0;
         if(activePlayer == 0) {
             current0.setText("0");

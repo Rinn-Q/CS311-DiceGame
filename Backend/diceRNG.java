@@ -1,4 +1,4 @@
-package Backside;
+package Backend;
 
 import java.util.Random;
 public class diceRNG {
@@ -78,6 +78,7 @@ public class diceRNG {
     // Resets the counter for chance adder
     public void rngReset()
     {
+        chancefor1 = 20;
         rollsSinceOne = 0;
     }
 }
