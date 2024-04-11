@@ -124,6 +124,7 @@ public class GameFunctions {
         {
             activescore[activePlayer] = 0;
             this.switchActive();
+            rand.rngReset();
             return 0;
         }
         else
