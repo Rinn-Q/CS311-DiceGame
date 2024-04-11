@@ -44,13 +44,13 @@ public class diceRNG {
 
         // Check if current roll is 1
         if (currentRoll == 1) {
-            System.out.println("Roll " + rollsSinceOne + ": You rolled a 1");
+            //System.out.println("Roll " + rollsSinceOne + ": You rolled a 1");
             rollsSinceOne = 0; // Reset the count of rolls since last 1
             chancefor1 = 20; // Reset the chance for 1 
         } 
         else 
         {
-            System.out.println("Roll " + rollsSinceOne + ": You rolled a " + currentRoll + "chance for 1:" + chancefor1);
+            //System.out.println("Roll " + rollsSinceOne + ": You rolled a " + currentRoll + "chance for 1:" + chancefor1);
             rollsSinceOne++; // Increment the count of rolls since last 1
             // Check if the probability of rolling a 1 should increase
             if(rollsSinceOne > 0)
@@ -63,13 +63,13 @@ public class diceRNG {
 
         // Check if a 1 hasn't been rolled yet within the first 10 rolls
         if (rollsSinceOne >= numRolls) {
-            System.out.println("Insured roll: Rolling a 1 to ensure it appears at least once within 10 rolls");
+            //System.out.println("Insured roll: Rolling a 1 to ensure it appears at least once within 10 rolls");
             // Reset count of rolls since last 1
             rollsSinceOne = 0;
             // Force a roll to 1 is obtained
             if (currentRoll != 1) {
                 currentRoll = 1;
-                System.out.println("Insured roll: You rolled a " + currentRoll);
+                //System.out.println("Insured roll: You rolled a " + currentRoll);
             }
         }
         return currentRoll;

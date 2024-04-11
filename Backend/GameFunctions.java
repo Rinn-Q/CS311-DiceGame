@@ -17,6 +17,7 @@ public class GameFunctions {
         this.activePlayer = 0;
         this.activescore = new int[2];
         this.player = new Player[] {p1, p2};
+        this.activescore[0] = this.activescore[1] = 0;
         this.score[0] = this.score[1] = 0;
     }
 
@@ -24,7 +25,7 @@ public class GameFunctions {
     /* Prints representation of the current state of the game */
     public void printState() 
     {
-        System.out.println( "Game Score: " + this.score[0]+"-" + this.score[1] + "\nGoal Score: " + this.goalscore);
+        System.out.println( "\nGoal Score: " + this.goalscore);
         System.out.println( "\nPlayers:\n\t" + this.player[0].getPname() + "\nScore: " + this.score[0] + "-" + this.score[1] + "\n\t" + this.player[1].getPname());
         System.out.println( this.player[activePlayer].getPname() + "'s turn\n");
     }
@@ -58,6 +59,7 @@ public class GameFunctions {
     /*changes the active player*/
     public void switchActive()
     {
+        rand.rngReset();
         if(activePlayer == 1)
         {
             activePlayer = 0;
@@ -78,7 +80,7 @@ public class GameFunctions {
     /*checks win condition */
     public boolean isGameOver()
     {
-        if(activePlayer == 1)
+        if(activePlayer == 0)
         {
             if(score[0] >= goalscore)
             {
@@ -109,7 +111,8 @@ public class GameFunctions {
     public void updateScore()
     {
         score[activePlayer] += activescore[activePlayer];
-        activescore[activePlayer] = 0;
+        activescore[0] = 0;
+        activescore[1] = 0;
     }
 
 
@@ -126,7 +129,7 @@ public class GameFunctions {
         else
         {
             activescore[activePlayer] += dice;
-            return activescore[activePlayer];
+            return dice;
         }
     }
 
@@ -134,7 +137,13 @@ public class GameFunctions {
     /* Resets the score back to 0-0 */
     public void resetScore()
     {
+        activePlayer = 0;
         this.score[0]=this.score[1]=0;
+    }
+
+    public int[] getActivescore()
+    {
+        return this.activescore;
     }
 
 
