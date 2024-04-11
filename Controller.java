@@ -211,12 +211,12 @@ public class Controller {
                         int diceNumber;
                         for (int i = 0; i < 15; i++) {
                             diceNumber = random.nextInt(6) + 1;
-                            File file = new File(currentPath + "/Dices/dice-" + diceNumber + ".png");
+                            File file = new File("DiceGame/Dices/dice-" + diceNumber + ".png");
                             diceImage.setImage(new Image(file.toURI().toString()));
                             Thread.sleep(50);
                             if(i == 14) {
                                 diceNumber = rand.diceRoll();
-                                file = new File(currentPath + "/Dices/dice-" + diceNumber + ".png");
+                                file = new File("DiceGame/Dices/dice-" + diceNumber + ".png");
                                 diceImage.setImage(new Image(file.toURI().toString()));
                                 Thread.sleep(50);
                                 if(diceNumber != 1) {
