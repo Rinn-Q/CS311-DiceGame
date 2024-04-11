@@ -21,12 +21,9 @@ import Backend.*;
 
 public class Controller {
     private boolean isNewGame;
-    private int activePlayer;
-    private int scores[] = new int[2];
-    private int roundScore;
 
     Random random = new Random();
-    diceRNG rand = new diceRNG();
+    menu menu = new menu();
 
     @FXML
     private Button newGameButton;
@@ -88,12 +85,8 @@ public class Controller {
         // Initialize UI components and setup initial state
         isNewGame = true;
 
-        activePlayer = 0;
+        menu.game.resetScore();
 
-        scores[0] = 0;
-        scores[1] = 0;
-
-        roundScore = 0;
 
         score0.setText("0");
         score1.setText("0");
@@ -134,18 +127,28 @@ public class Controller {
     // }
 
     @FXML
+    private void diceUpdate()
+    {
+        int[] temp = new int[2];
+        temp = menu.game.getActivescore();
+        current0.setText(Integer.toString(temp[0]));
+        current1.setText(Integer.toString(temp[1]));
+    }
+    
+
+    @FXML
     private void onClickHold(ActionEvent event) {
         // Handle the "HOLD" button click event
-        rand.rngReset();
         if(isNewGame == true) {
-            scores[activePlayer] += roundScore;
-            if(activePlayer == 0) {
-                score0.setText(Integer.toString(scores[activePlayer]));
-            } else {
-                score1.setText(Integer.toString(scores[activePlayer]));
-            }
+            menu.game.updateScore();
+            this.diceUpdate();
+            int[] scores = new int[2];
+            scores = menu.game.getScore();
+            score0.setText(Integer.toString(scores[0]));
+            score1.setText(Integer.toString(scores[1]));
 
-            if(scores[activePlayer] >= 40) {
+            if(menu.game.isGameOver()) 
+            {
                 isNewGame = false;
 
                 diceImage.setVisible(false);
@@ -153,7 +156,7 @@ public class Controller {
                 rollDiceButton.setVisible(false);
                 holdButton.setVisible(false);
 
-                if(activePlayer == 0) {
+                if(menu.game.getActiveplayer() == 0) {
                     name0.setText("Winner");
                     name0.setStyle("-fx-text-fill: #EB4D4D;");
                     name0.setFont(Font.font("System", FontWeight.BOLD, 20));
@@ -166,8 +169,11 @@ public class Controller {
                     name0.setText("Loser");
                     active1.setVisible(false);
                 }
-            } else {
+            } 
+            else 
+            {
                 switchToNextPlayer();
+                menu.game.switchActive();
             }
         }
     }
@@ -177,11 +183,7 @@ public class Controller {
         Alert alert = new Alert(AlertType.NONE);
         alert.setTitle("Тоглоомын танилцуулга");
 
-        alert.setContentText(
-            "1. 2 тоглогч хэн нь түрүүлж эхлэхээ хоорондоо тохирно. " + "\n" +
-            "2. Таныг оноогоо татах эсвэл алдах хүртэл одоогийн оноонд шооны буусан оноо нэмэгдэнэ. " + "\n" +
-            "3. Ээлжээр шоог хаях бөгөөд таны хаясан шоо 1 нүдээр буух хүртэл эсвэл цуглуулсан оноог татаж авах хүртэл хаяж болно." + "\n" + 
-            "4. Түрүүлж 20 оноонд хүрсэн тоглогч ялалт байгуулна.");
+        alert.setContentText(menu.getInstruction());
 
         ButtonType closeButton = new ButtonType("OKAYYY", ButtonData.OK_DONE);
         alert.getButtonTypes().add(closeButton);
@@ -217,19 +219,20 @@ public class Controller {
                             if(i == 14) {
                                 diceNumber = rand.diceRoll();
                                 file = new File("DiceGame/Dices/dice-" + diceNumber + ".png");
+                            if(i == 14) 
+                            {
+                                diceNumber = menu.game.rolldice();
+                                if(diceNumber == 0)
+                                    file = new File(currentPath + "/Dices/dice-1.png");
+                                else
+                                    file = new File(currentPath + "/Dices/dice-" + diceNumber + ".png");
                                 diceImage.setImage(new Image(file.toURI().toString()));
-                                Thread.sleep(50);
-                                if(diceNumber != 1) {
-                                    roundScore += diceNumber;
-                                    if(activePlayer == 0){
-                                        current0.setText(Integer.toString(roundScore));
-                                    }
-                                    else {
-                                        current1.setText(Integer.toString(roundScore));
-                                    }
-                                }
-                                else {
+                                diceUpdate();
+                                if(diceNumber == 0) 
+                                {
+                                    menu.game.switchActive();
                                     switchToNextPlayer();
+                                    menu.game.switchActive();
                                 }
                             }
                         }
@@ -246,10 +249,7 @@ public class Controller {
     }
 
     public void switchToNextPlayer() {
-        roundScore = 0;
-        if(activePlayer == 0) {
-            current0.setText("0");
-            activePlayer = 1;
+        if(menu.game.getActiveplayer() == 0) {
             active0.setVisible(false);
             active1.setVisible(true);
 
@@ -259,9 +259,8 @@ public class Controller {
             name0.setFont(Font.font("System", FontWeight.BLACK, 12));
             name1.setFont(Font.font("System", FontWeight.BOLD, 16));
         }
-        else {
-            current1.setText("0");
-            activePlayer = 0;
+        else 
+        {
             active0.setVisible(true);
             active1.setVisible(false);
 
