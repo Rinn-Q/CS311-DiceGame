@@ -11,7 +11,7 @@ public class diceRNG {
     public diceRNG()
     {
         rollsSinceOne = 0;
-        chancefor1 = 20;
+        chancefor1 = 18;
     }
 
     
@@ -78,7 +78,7 @@ public class diceRNG {
     // Resets the counter for chance adder
     public void rngReset()
     {
-        chancefor1 = 20;
+        chancefor1 = 18;
         rollsSinceOne = 0;
     }
 }
