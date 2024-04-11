@@ -32,8 +32,6 @@ public class App extends Application {
         
         // Set the title of the Stage
         primaryStage.setTitle("DICE GAME");
-        
-        // Show the Stage
         primaryStage.show();
     }   
 

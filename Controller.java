@@ -1,11 +1,7 @@
 import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -18,8 +14,11 @@ import java.nio.file.*;
 
 import java.util.Random;
 import Backend.*;
+import Frontend.*;
 
 public class Controller {
+
+    // ------------------------------------Controller variable declaration----------------------------------
     private boolean isNewGame;
 
     Random random = new Random();
@@ -80,9 +79,9 @@ public class Controller {
     private Circle active1;
 
 
+    // ----------------------------------------------initial game-------------------------------------------------
     @FXML
     private void initialize() {
-        // Initialize UI components and setup initial state
         isNewGame = true;
 
         menu.game.resetScore();
@@ -115,9 +114,9 @@ public class Controller {
         diceImage.setVisible(false);
     }
 
+    //--------------------------------------------------OnClick new game-------------------------------------------
     @FXML
     private void onClickNewGame(ActionEvent event) {
-        // Handle the "NEW GAME" button click event
         initialize();
     }
 
@@ -179,26 +178,33 @@ public class Controller {
     }
     @FXML
     private void onClickMenu(ActionEvent event) {
-        // Handle the "MENU" button click event
-        Alert alert = new Alert(AlertType.NONE);
-        alert.setTitle("Тоглоомын танилцуулга");
-
-        alert.setContentText(menu.getInstruction());
-
-        ButtonType closeButton = new ButtonType("OKAYYY", ButtonData.OK_DONE);
-        alert.getButtonTypes().add(closeButton);
-
-        Button closeBtn = (Button) alert.getDialogPane().lookupButton(closeButton);
-        closeBtn.setOnAction(e -> alert.close());
-
-
-        alert.getDialogPane().setPrefWidth(350); // Set your preferred width
-        alert.getDialogPane().setPrefHeight(250);
-        alert.showAndWait();
+        Menu mu = new Menu();
+        System.out.println(menu.getInstruction());
+        mu.showMenu();
     }
+
     @FXML
     private void  setCurrentPlayerImage(ImageView view){
         this.diceImage=view;
+    }
+
+    private void checkActive(int i , int diceNumber , File file) {
+        if(i == 14) 
+        {
+            diceNumber = menu.game.rolldice();
+            if(diceNumber == 0)
+                file = new File("DiceGame/Dices/dice-1.png");
+            else
+                file = new File("DiceGame/Dices/dice-" + diceNumber + ".png");
+            diceImage.setImage(new Image(file.toURI().toString()));
+            diceUpdate();
+            if(diceNumber == 0) 
+            {
+                menu.game.switchActive();
+                switchToNextPlayer();
+                menu.game.switchActive();
+            }
+        }
     }
 
     @FXML
@@ -207,7 +213,6 @@ public class Controller {
         diceImage.setVisible(true);
         Thread thread = new Thread() {
             public void run() {
-                Path currentPath = Paths.get(System.getProperty("user.dir"));
                 if(isNewGame == true) {
                     try {
                         int diceNumber;
@@ -216,28 +221,13 @@ public class Controller {
                             File file = new File("DiceGame/Dices/dice-" + diceNumber + ".png");
                             diceImage.setImage(new Image(file.toURI().toString()));
                             Thread.sleep(50);
-                            if(i == 14) {
-                                diceNumber = rand.diceRoll();
-                                file = new File("DiceGame/Dices/dice-" + diceNumber + ".png");
-                            if(i == 14) 
-                            {
-                                diceNumber = menu.game.rolldice();
-                                if(diceNumber == 0)
-                                    file = new File(currentPath + "/Dices/dice-1.png");
-                                else
-                                    file = new File(currentPath + "/Dices/dice-" + diceNumber + ".png");
-                                diceImage.setImage(new Image(file.toURI().toString()));
-                                diceUpdate();
-                                if(diceNumber == 0) 
-                                {
-                                    menu.game.switchActive();
-                                    switchToNextPlayer();
-                                    menu.game.switchActive();
-                                }
-                            }
-                        }
+
+                            checkActive(i , diceNumber , file);
+                        
                         rollDiceButton.setDisable(false);
-                    } catch (InterruptedException e) {
+                    }
+                    menu.game.printState();
+                } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 } else {
@@ -245,6 +235,7 @@ public class Controller {
                 }
             }
         };
+
         thread.start();
     }
 
