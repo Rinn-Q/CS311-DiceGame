@@ -1,0 +1,19 @@
+.root {
+    
+}
+
+.button{
+    -fx-background-color: #EB4D4D;
+    -fx-text-fill: #fff;
+}
+
+.text-field{
+    -fx-background-color: #EB4D4D;
+    -fx-text-fill: #fff;
+}
+
+#rollDiceButton {
+    -fx-background-color: #EB4D4D;
+}
+
+
