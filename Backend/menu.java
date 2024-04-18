@@ -1,6 +1,6 @@
 package Backend;
     
-public class menu 
+public class menu implements menu_Interface
 {
     public GameFunctions game;
     public menu()

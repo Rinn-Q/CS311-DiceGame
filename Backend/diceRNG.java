@@ -1,7 +1,6 @@
 package Backend;
-
 import java.util.Random;
-public class diceRNG {
+public class diceRNG implements diceRNG_Interface{
 
     //counter for roll since 1 
     private int rollsSinceOne;

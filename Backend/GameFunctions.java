@@ -1,6 +1,6 @@
 package Backend;
 
-public class GameFunctions {
+public class GameFunctions implements GameFunctions_Interface {
 
     public int goalscore, activescore[];
     public int activePlayer;

@@ -1,5 +1,5 @@
 package Backend;
-public class Player {
+public class Player implements Player_Interface{
     private String name;
     //private int playerID;
     //private int rank;
