@@ -1,8 +1,6 @@
 package Backend;
-public class Player {
+public class Player implements I_PLayer{
     private String name;
-    //private int playerID;
-    //private int rank;
     public Player(String name/* , int playerID, int rank*/)
     {
         this.name = name;
