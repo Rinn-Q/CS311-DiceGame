@@ -1,6 +1,6 @@
 package Backend;
     
-public class menu implements I_menu
+public class menu 
 {
     public GameFunctions game;
     public menu()
