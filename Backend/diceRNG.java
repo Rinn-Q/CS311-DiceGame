@@ -26,7 +26,7 @@ public class diceRNG {
         int numRolls = 10; // You can adjust the number of rolls as needed
         // The number of roll defines the sure chance for rolling 1 
 
-
+    
         // The chance for rolling a 1 and 2-6 numbers
 
         // generating a chance for 1 and 2-6
@@ -46,7 +46,7 @@ public class diceRNG {
         if (currentRoll == 1) {
             //System.out.println("Roll " + rollsSinceOne + ": You rolled a 1");
             rollsSinceOne = 0; // Reset the count of rolls since last 1
-            chancefor1 = 18; // Reset the chance for 1 
+            chancefor1 = 20; // Reset the chance for 1 
         } 
         else 
         {
@@ -55,7 +55,7 @@ public class diceRNG {
             // Check if the probability of rolling a 1 should increase
             if(rollsSinceOne > 0)
             {
-                chancefor1 += 3;
+                chancefor1 += 5;
             }
         }
 

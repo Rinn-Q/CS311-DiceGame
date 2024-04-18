@@ -191,12 +191,11 @@ public class Controller {
     private void checkActive(int i , int diceNumber , File file) {
         if(i == 14) 
         {
-            Path currentPath = Paths.get(System.getProperty("user.dir"));
             diceNumber = menu.game.rolldice();
             if(diceNumber == 0)
-                file = new File(currentPath + "/Dices/dice-1.png");
+                file = new File("DiceGame/Dices/dice-1.png");
             else
-                file = new File(currentPath + "/Dices/dice-" + diceNumber + ".png");
+                file = new File("DiceGame/Dices/dice-" + diceNumber + ".png");
             diceImage.setImage(new Image(file.toURI().toString()));
             diceUpdate();
             if(diceNumber == 0) 
@@ -218,9 +217,8 @@ public class Controller {
                     try {
                         int diceNumber;
                         for (int i = 0; i < 15; i++) {
-                            Path currentPath = Paths.get(System.getProperty("user.dir"));
                             diceNumber = random.nextInt(6) + 1;
-                            File file = new File(currentPath + "/Dices/dice-" + diceNumber + ".png");
+                            File file = new File("DiceGame/Dices/dice-" + diceNumber + ".png");
                             diceImage.setImage(new Image(file.toURI().toString()));
                             Thread.sleep(50);
 

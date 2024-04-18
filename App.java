@@ -14,7 +14,7 @@ public class App extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         Path currentPath = Paths.get(System.getProperty("user.dir"));
-        File file = new File(currentPath + "/Dices/game-icon.png");
+        File file = new File("DiceGame/Dices/game-icon.png");
         Image icon = new Image(file.toURI().toString());
         primaryStage.getIcons().add(icon);
         // Load the FXML file
