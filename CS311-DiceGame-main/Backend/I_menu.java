@@ -1,5 +1,5 @@
 package Backend;
 
-public interface I_menu {    
+public interface I_menu {
     String getInstruction();
 }
