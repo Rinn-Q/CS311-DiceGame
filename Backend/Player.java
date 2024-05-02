@@ -1,13 +1,22 @@
 package Backend;
-public class Player implements Player_Interface{
+import java.io.Serializable;
+import java.net.*;
+
+public class Player implements Player_Interface, Serializable
+{
     private String name;
-    //private int playerID;
+    private Socket playerID;
     //private int rank;
-    public Player(String name/* , int playerID, int rank*/)
+    public Player(String name , Socket playerID)
     {
         this.name = name;
-/*      this.playerID = playerID;
-        this.rank = rank;*/
+        this.playerID = playerID;
+//        this.rank = rank;
+    }
+    public Player(String name)
+    {
+        this.name = name;
+//        this.rank = rank;
     }
 
     public String getPname()
@@ -15,11 +24,11 @@ public class Player implements Player_Interface{
         return name;
     }
 
-/*     public int getPID ()
+     public Socket getPID ()
     {
         return playerID;
     }
-
+/*
     public int  etPRank()
     {
         return rank;

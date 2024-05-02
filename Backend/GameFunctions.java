@@ -1,6 +1,9 @@
 package Backend;
 
-public class GameFunctions implements GameFunctions_Interface {
+import java.io.Serializable;
+
+public class GameFunctions implements GameFunctions_Interface, Serializable 
+{
 
     public int goalscore, activescore[];
     public int activePlayer;
@@ -59,6 +62,7 @@ public class GameFunctions implements GameFunctions_Interface {
     /*changes the active player*/
     public void switchActive()
     {
+        rand.rngReset();
         rand.rngReset();
         if(activePlayer == 1)
         {
@@ -140,6 +144,7 @@ public class GameFunctions implements GameFunctions_Interface {
     {
         activePlayer = 0;
         this.score[0]=this.score[1]=0;
+        rand.rngReset();
     }
 
     public int[] getActivescore()

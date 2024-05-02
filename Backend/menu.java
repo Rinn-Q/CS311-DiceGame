@@ -1,6 +1,9 @@
 package Backend;
-    
-public class menu implements menu_Interface
+
+import java.io.Serializable;
+import java.net.Socket;
+
+public class menu implements menu_Interface, Serializable, Cloneable
 {
     public GameFunctions game;
     public menu()
@@ -9,7 +12,16 @@ public class menu implements menu_Interface
         Player player2 = new Player("player 2");
         game = new GameFunctions(player1, player2);
     }
-
+    public menu(Socket p1,Socket p2 ,String ip, int port)
+    {        
+        Player player1 = new Player("player 1", p1);
+        Player player2 = new Player("player 2", p2);
+        game = new GameFunctions(player1, player2);
+    }
+    public Object clone() throws CloneNotSupportedException 
+    { 
+        return super.clone(); 
+    } 
     /*the instruction*/
     public String getInstruction()
     {

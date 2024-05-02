@@ -1,6 +1,8 @@
 package Backend;
+import java.io.Serializable;
 import java.util.Random;
-public class diceRNG implements diceRNG_Interface{
+public class diceRNG implements diceRNG_Interface, Serializable
+{
 
     //counter for roll since 1 
     private int rollsSinceOne;
